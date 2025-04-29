@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head><title>Verification Result</title></head>
+<body>
+    <h1>Verification Result for {{ serial }}</h1>
+    <p><strong>Current Owner:</strong> {{ owner }}</p>
+    <h2>Ownership History:</h2>
+    <ul>
+    {% for record in history %}
+        <li>{{ record }}</li>
+    {% endfor %}
+    </ul>
+    <a href="/verify">Back to Verify</a>
+</body>
+</html>
