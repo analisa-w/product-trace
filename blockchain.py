@@ -55,7 +55,7 @@ class Blockchain:
         """Check if a block is valid"""
         # Check if block's hash is valid
         if not block.is_valid():
-            print(f"Block hash validation failed for block {block.hash}")
+            print(f"Malicious block detected & blocked (invalid hash): {block.hash}")
             return False
             
         # Check if block's hash meets difficulty requirement

@@ -12,10 +12,10 @@ NODE_PORT = 5001
 '''def send_udp_message(message):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.sendto(json.dumps(message).encode(), (NODE_IP, NODE_PORT))'''
-def send_udp_message(message):
+def send_udp_message(message, port=NODE_PORT):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.settimeout(2)  # 2 second timeout
-    sock.sendto(json.dumps(message).encode(), (NODE_IP, NODE_PORT))
+    sock.sendto(json.dumps(message).encode(), (NODE_IP, port))
 
     try:
         data, _ = sock.recvfrom(4096)
@@ -36,6 +36,7 @@ def register():
         serial = request.form["serial_number"]
         model = request.form["model"]
         brand = request.form["brand"]
+        node_port = int(request.form["node_port"])
 
         message = {
             "type": "register",
@@ -45,12 +46,12 @@ def register():
                 "brand": brand
             }
         }
-        ack = send_udp_message(message)
+        ack = send_udp_message(message, port=node_port)
 
         if ack.get("status") == "accepted":
             return render_template("register_success.html", serial=serial, model=model, brand=brand)
         else:
-            reason = ack.get("reason", "Unknown error during registration")
+            reason = ack.get("reason", "Potentially malicious block detected during registration.")
             return render_template("register_fail.html", serial=serial, reason=reason)
 
     return render_template("register.html")

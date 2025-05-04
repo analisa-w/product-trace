@@ -155,7 +155,7 @@ def start_node(my_port):
                 sock.sendto(json.dumps(response).encode(), addr)
 
             elif message["type"] == "new_block":
-                print("Received a new block from another peer!")
+                print(f"Received a new block from node at port {addr[1]}")
                 block_data = message["data"]
                 new_block = Block(
                     block_data["index"],

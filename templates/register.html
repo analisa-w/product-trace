@@ -14,8 +14,17 @@
         <div class="mb-3">
             <input type="text" class="form-control" name="model" placeholder="Model" required>
         </div>
-        <div class="mb-4">
+        <div class="mb-3">
             <input type="text" class="form-control" name="brand" placeholder="Brand" required>
+        </div>
+        <div class="mb-4">
+            <select class="form-select" name="node_port" required>
+                <option disabled selected value="">Select Node</option>
+                <option value="5001">Node 5001 (Honest)</option>
+                <option value="5002">Node 5002 (Honest)</option>
+                <option value="5003">Node 5003 (Honest)</option>
+                <option value="5009">Node 5009 (Malicious)</option>
+            </select>
         </div>
         <input type="submit" class="btn btn-primary btn-lg" value="Register">
     </form>

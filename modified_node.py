@@ -53,7 +53,7 @@ def start_malicious_node(my_port):
                 broadcast_block(sock, fake_block, peer_list)
 
                 # Respond to sender as if it were successful
-                response = {"status": "accepted (malicious)"}
+                response = {"status": "malicious"}
                 sock.sendto(json.dumps(response).encode(), addr)
 
             else:

@@ -30,6 +30,8 @@ class Block:
                 break
             self.nonce += 1
 
-    def is_valid(self):
-        """Check if the block's hash is valid"""
-        return self.hash == self.compute_hash()
+    def is_valid(self, difficulty=4):
+        """Check if the block's hash is valid and meets the difficulty requirement"""
+        valid_hash = self.hash == self.compute_hash()
+        meets_difficulty = self.hash.startswith("0" * difficulty)
+        return valid_hash and meets_difficulty
