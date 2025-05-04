@@ -114,7 +114,12 @@ def start_node(my_port):
                         "from": from_owner,
                         "to": to_owner
                     }
-                    bc.add_block([tx])
+                    bc.add_transaction(tx)
+                    new_block = bc.mine_block()
+                    if new_block:
+                        bc.add_block(new_block)
+                        broadcast_block(sock, new_block, peer_list)
+
                     print(f"Transferred product: {tx}")
                     broadcast_block(sock, bc.chain[-1], peer_list)
                     response = {"status": "accepted"}
@@ -163,13 +168,12 @@ def start_node(my_port):
 
                 # Check if block extends current chain
                 if new_block.prev_hash == bc.chain[-1].hash:
-                    if new_block.is_valid():
+                    if bc.is_valid_block(new_block):
                         bc.chain.append(new_block)
                         print("Block added to blockchain!")
-                        # Broadcast to other peers
                         broadcast_block(sock, new_block, peer_list)
                     else:
-                        print("Block validation failed!")
+                        print("Malicious block detected & blocked!")
                 else:
                     print(f"Received block that doesn't match current chain. Current hash: {bc.chain[-1].hash}, Block prev_hash: {new_block.prev_hash}")
                     # Add block to potential forks
