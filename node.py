@@ -9,7 +9,8 @@ def start_node(my_port):
 
     peer_list = [
     ("127.0.0.1", 5002),  # Example: another node running on your computer
-    ("127.0.0.1", 5003),    
+    ("127.0.0.1", 5003), 
+    ("127.0.0.1", 5009)   
     ]
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
