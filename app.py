@@ -45,7 +45,7 @@ def register():
             }
         }
         send_udp_message(message)
-        return "Product Registered! ✅"
+        return render_template("register_success.html", serial=serial, model=model, brand=brand)
 
     return render_template("register.html")
 
@@ -67,12 +67,11 @@ def transfer():
         ack = send_udp_message(message)
 
         if ack["status"] == "accepted":
-            return "Ownership Transferred! ✅"
+            return render_template("transfer_success.html", serial=serial, from_owner=from_owner, to_owner=to_owner)
         elif ack["status"] == "rejected":
-            return f"Transfer Rejected ❌: {ack.get('reason', 'Unknown reason')}"
+            return render_template("transfer_fail.html", serial=serial, reason=ack.get("reason", "Unknown reason"))
         else:
-            return "No response from node (timeout). ❌"
-
+            return render_template("transfer_fail.html", serial=serial, reason="No response from node (timeout).")
     return render_template("transfer.html")
 
 
@@ -90,9 +89,9 @@ def verify():
         ack = send_udp_message(message)
 
         if ack.get("registered"):
-            return render_template("verify_result.html", serial=serial, owner=ack["owner"], history=ack["history"])
+            return render_template("verify_success.html", serial=serial, owner=ack["owner"], history=ack["history"])
         else:
-            return f"Product {serial} is NOT registered. ❌"
+            return render_template("verify_fail.html", serial=serial)
 
     return render_template("verify.html")
 
