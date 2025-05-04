@@ -26,15 +26,28 @@ def start_node(my_port):
 
             if message["type"] == "register":
                 print("Received a register request!")
-                tx = {
-                    "type": "register",
-                    "serial_number": message["data"]["serial_number"],
-                    "model": message["data"]["model"],
-                    "owner": message["data"]["brand"]  # Brand = initial owner
-                }
-                bc.add_block([tx])
-                print(f"Registered product: {tx}")
-                broadcast_block(sock, bc.chain[-1], peer_list)
+                serial = message["data"]["serial_number"]
+                result = bc.verify_product(serial)
+                response = {}
+
+                if result["registered"]:
+                    print(f"Registration rejected, product {serial} already exists")
+                    response = {
+                            "status": "rejected", 
+                            "reason": "Product with that serial number already exists."}
+                    sock.sendto(json.dumps(response).encode(), addr)
+                else:
+                    tx = {
+                        "type": "register",
+                        "serial_number": message["data"]["serial_number"],
+                        "model": message["data"]["model"],
+                        "owner": message["data"]["brand"]  # Brand = initial owner
+                    }
+                    bc.add_block([tx])
+                    print(f"Registered product: {tx}")
+                    broadcast_block(sock, bc.chain[-1], peer_list)
+                    response = {"status": "accepted"}
+                    sock.sendto(json.dumps(response).encode(), addr)
 
             elif message["type"] == "transfer":
                 print("Received a transfer request!")
@@ -48,10 +61,10 @@ def start_node(my_port):
 
                 if not result["registered"]:
                     print(f"Transfer rejected: Product {serial} not registered.")
-                    response = {"status": "rejected", "reason": "Product not registered"}
+                    response = {"status": "rejected", "reason": "Product not registered."}
                 elif result["owner"] != from_owner:
                     print(f"Transfer rejected: {from_owner} is not the current owner.")
-                    response = {"status": "rejected", "reason": "Wrong current owner"}
+                    response = {"status": "rejected", "reason": "Wrong current owner."}
                 else:
                     tx = {
                         "type": "transfer",
@@ -67,7 +80,34 @@ def start_node(my_port):
                 # ✅ Send a response back to sender
                 sock.sendto(json.dumps(response).encode(), addr)
 
-            
+            elif message["type"] == "verify":
+                print("Received a verification request!")
+                serial = message["data"]["serial_number"]
+
+                result = bc.verify_product(serial)
+
+                if result["registered"]:
+                    # Build history from the blockchain
+                    history = []
+                    for block in bc.chain:
+                        for tx in block.transactions:
+                            if tx["serial_number"] == serial:
+                                if tx["type"] == "register":
+                                    history.append(f"Registered by {tx['owner']}")
+                                elif tx["type"] == "transfer":
+                                    history.append(f"Transferred from {tx['from']} to {tx['to']}")
+
+                    response = {
+                        "registered": True,
+                        "owner": result["owner"],
+                        "history": history
+                    }
+                else:
+                    response = {"registered": False}
+
+                sock.sendto(json.dumps(response).encode(), addr)
+
+    
 
             elif message["type"] == "new_block":
                 print("Received a new block from another peer!")

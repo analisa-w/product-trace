@@ -44,8 +44,13 @@ def register():
                 "brand": brand
             }
         }
-        send_udp_message(message)
-        return render_template("register_success.html", serial=serial, model=model, brand=brand)
+        ack = send_udp_message(message)
+
+        if ack.get("status") == "accepted":
+            return render_template("register_success.html", serial=serial, model=model, brand=brand)
+        else:
+            reason = ack.get("reason", "Unknown error during registration")
+            return render_template("register_fail.html", serial=serial, reason=reason)
 
     return render_template("register.html")
 
