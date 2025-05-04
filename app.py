@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, redirect
 import socket
 import json
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -100,6 +101,23 @@ def verify():
 
     return render_template("verify.html")
 
+@app.route('/blockchain')
+def blockchain():
+    message = {
+        "type": "get_blockchain",
+        "data": {}
+    }
+    ack = send_udp_message(message)
+    
+    if ack.get("status") == "success":
+        print("BLOCKCHAIN DATA:", ack)
+        return render_template("blockchain.html", chain=ack["chain"])
+    else:
+        return render_template("blockchain_error.html")
+
+@app.template_filter('datetime')
+def datetime_filter(ts):
+    return datetime.fromtimestamp(ts).strftime("%Y-%m-%d %H:%M:%S")
 
 if __name__ == "__main__":
     app.run(debug=True)
