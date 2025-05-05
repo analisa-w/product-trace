@@ -19,7 +19,7 @@ def send_udp_message(message, port=NODE_PORT):
     sock.sendto(json.dumps(message).encode(), (NODE_IP, port))
 
     try:
-        data, _ = sock.recvfrom(4096)
+        data, _ = sock.recvfrom(65535)
         ack = json.loads(data.decode())
         return ack
     except socket.timeout:
