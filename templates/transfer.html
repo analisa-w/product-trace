@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
 <head>
     <title>Transfer Product</title>
@@ -24,4 +24,28 @@
         <a href="/" class="btn btn-outline-secondary">Back to Home</a>
     </div>
 </body>
-</html>
+</html>-->
+
+{% extends "layout.html" %}
+
+{% block title %}Transfer Product{% endblock %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h1 class="mb-4">Transfer Product Ownership</h1>
+
+    <form method="POST" class="mx-auto" style="max-width: 400px;">
+        <div class="mb-3">
+            <input type="text" class="form-control" name="serial_number" placeholder="Serial Number" required>
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" name="from_owner" placeholder="From Owner/Brand" required>
+        </div>
+        <div class="mb-4">
+            <input type="text" class="form-control" name="to_owner" placeholder="To Owner" required>
+        </div>
+        <input type="submit" class="btn btn-primary btn-lg" value="Transfer">
+    </form>
+</div>
+{% endblock %}
+

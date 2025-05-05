@@ -13,6 +13,7 @@ NODE_PORT = 5001
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.sendto(json.dumps(message).encode(), (NODE_IP, NODE_PORT))'''
 def send_udp_message(message, port=NODE_PORT):
+    
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.settimeout(2)  # 2 second timeout
     sock.sendto(json.dumps(message).encode(), (NODE_IP, port))

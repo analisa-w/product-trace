@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
 <head>
     <title>Verification Failed</title>
@@ -14,4 +14,20 @@
         <a href="/" class="btn btn-outline-secondary">Back to Home</a>
     </div>
 </body>
-</html>
+</html>-->
+
+{% extends "layout.html" %}
+{% block title %}Verification Failed{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h1 class="text-danger mb-4">Product {{ serial }} is not registered.</h1>
+
+    <p class="lead">We could not find a matching product with that serial number.</p>
+
+    <div class="mt-4">
+        <a href="/verify" class="btn btn-outline-primary">Back to Verification Page</a>
+        <a href="/" class="btn btn-outline-secondary">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

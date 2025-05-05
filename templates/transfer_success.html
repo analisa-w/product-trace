@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
 <head>
     <title>Transfer Success</title>
@@ -16,4 +16,23 @@
         <a href="/" class="btn btn-outline-secondary">Back to Home</a>
     </div>
 </body>
-</html>
+</html>-->
+
+{% extends "layout.html" %}
+{% block title %}Transfer Success{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h1 class="mb-4 text-success">Ownership Transferred Successfully!</h1>
+
+    <p class="lead"><strong>Serial Number:</strong> {{ serial }}</p>
+    <p><strong>From:</strong> {{ from_owner }}</p>
+    <p><strong>To:</strong> {{ to_owner }}</p>
+
+    <div class="d-flex justify-content-center gap-3 mt-4">
+        <a href="/transfer" class="btn btn-outline-primary">Transfer Another</a>
+        <a href="/" class="btn btn-outline-secondary">Back to Home</a>
+    </div>
+</div>
+{% endblock %}
+

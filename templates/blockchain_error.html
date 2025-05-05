@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
 <head>
     <title>Blockchain Error</title>
@@ -19,4 +19,24 @@
         <a href="/" class="btn btn-outline-secondary">Back to Home</a>
     </div>
 </body>
-</html> 
+</html> -->
+
+{% extends "layout.html" %}
+{% block title %}Blockchain Error{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h1 class="text-danger mb-4">Error Accessing Blockchain</h1>
+
+    <p class="lead">We were unable to fetch the blockchain data. This could be due to:</p>
+    <ul class="list-unstyled">
+        <li>The node being offline</li>
+        <li>Network connectivity issues</li>
+        <li>Internal server error</li>
+    </ul>
+
+    <div class="mt-4">
+        <a href="/" class="btn btn-outline-secondary">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

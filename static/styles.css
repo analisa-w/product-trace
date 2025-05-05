@@ -1,0 +1,41 @@
+/* Reset Bootstrap button colors */
+.btn-register {
+    background-color: #4673d4;
+    color: white;
+    font-weight: 600;
+  }
+  
+  .btn-register:hover {
+    background-color: #2046a3;
+  }
+  
+  .btn-transfer {
+    background-color: #6e7476;
+    color: white;
+    font-weight: 600;
+  }
+  
+  .btn-transfer:hover {
+    background-color: #4a3939;
+  }
+  
+  .btn-verify {
+    background-color: #199352;
+    color: white;
+    font-weight: 600;
+  }
+  
+  .btn-verify:hover {
+    background-color: #106035;
+  }
+  
+  .btn-view {
+    background-color: #4d908f;
+    color: white;
+    font-weight: 600;
+  }
+  
+  .btn-view:hover {
+    background-color: #305f5e;
+  }
+  

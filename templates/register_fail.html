@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
 <head>
     <title>Registration Failed</title>
@@ -14,4 +14,21 @@
         <a href="/" class="btn btn-outline-secondary">Back to Home</a>
     </div>
 </body>
-</html>
+</html>-->
+
+
+{% extends "layout.html" %}
+{% block title %}Registration Failed{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h1 class="text-danger mb-4">Registration Failed.</h1>
+    <p><strong>Serial number:</strong> {{ serial }}</p>
+    <p class="lead">{{ reason }}</p>
+
+    <div class="mt-4">
+        <a href="/register" class="btn btn-outline-primary">Try Again</a>
+        <a href="/" class="btn btn-outline-secondary">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

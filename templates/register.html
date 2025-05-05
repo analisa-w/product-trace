@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
 <head>
     <title>Register Product</title>
@@ -33,4 +33,35 @@
         <a href="/" class="btn btn-outline-secondary">Back to Home</a>
     </div>
 </body>
-</html>
+</html> -->
+{% extends "layout.html" %}
+
+{% block title %}Register Product{% endblock %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h1 class="mb-4">Register a New Product</h1>
+
+    <form method="POST" class="mx-auto" style="max-width: 400px;">
+        <div class="mb-3">
+            <input type="text" class="form-control" name="serial_number" placeholder="Serial Number" required>
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" name="model" placeholder="Model" required>
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" name="brand" placeholder="Brand" required>
+        </div>
+        <div class="mb-4">
+            <select class="form-select" name="node_port" required>
+                <option disabled selected value="">Select Node</option>
+                <option value="5001">Node 5001 (Honest)</option>
+                <option value="5002">Node 5002 (Honest)</option>
+                <option value="5003">Node 5003 (Honest)</option>
+                <option value="5009">Node 5009 (Malicious)</option>
+            </select>
+        </div>
+        <input type="submit" class="btn btn-primary btn-lg" value="Register">
+    </form>
+</div>
+{% endblock %}

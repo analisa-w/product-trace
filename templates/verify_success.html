@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
 <head>
     <title>Verification Success</title>
@@ -22,4 +22,29 @@
         <a href="/" class="btn btn-outline-secondary">Back to Home</a>
     </div>
 </body>
-</html>
+</html>-->
+
+
+{% extends "layout.html" %}
+{% block title %}Verification Success{% endblock %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h1 class="mb-4 text-success">Product Verified Successfully!</h1>
+
+    <p class="lead"><strong>Serial Number:</strong> {{ serial }}</p>
+    <p><strong>Current Owner:</strong> {{ owner }}</p>
+
+    <h2 class="mt-4">Ownership History</h2>
+    <ul class="list-group list-group-flush mx-auto mb-4" style="max-width: 400px; text-align: left;">
+        {% for record in history %}
+            <li class="list-group-item">{{ record }}</li>
+        {% endfor %}
+    </ul>
+
+    <div class="d-flex justify-content-center gap-3">
+        <a href="/verify" class="btn btn-outline-primary">Back to Verification Page</a>
+        <a href="/" class="btn btn-outline-secondary">Back to Home</a>
+    </div>
+</div>
+{% endblock %}
