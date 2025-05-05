@@ -28,4 +28,4 @@ Each of these pages are relatively self-explanatory. However, on the register pa
 
 When transferring and verifying products, you will need the serial number and/or brand name of an existing product first. If you forget any of this information, you can simply open "View Blockchain" in the same tab or a new tab to find this information, then enter it on the form.  
 
-When you are done running the program and have registered/transferred/verified/viewed as much as you want, first terminate the app process, then terminate all the node processes. The way we have been closing these programs is manually with Control^+C. 
+When you are done running the program and have registered/transferred/verified/viewed as much as you want, first terminate the app process, then terminate all the node processes. The way we have been closing these programs is manually with Control^+C. You are also able to terminate the app process while keeping the nodes running, and if you rerun the app all the blockchain information will still be preserved and presented on the webpage. 
