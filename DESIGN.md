@@ -125,7 +125,7 @@ Form inputs on each page trigger a POST request, which sends a JSON packet via U
 - **Lyali:**  
   Led networking logic, implemented the UDP socket server and message routing logic between nodes, including block broadcasting and acknowledgment handling.
 
-Despite these roles, all team members collaborated across areas to integrate the system and debug the end-to-end flow.
+All team members collaborated across areas to integrate the system and debug the end-to-end flow!
 
 ---
 
