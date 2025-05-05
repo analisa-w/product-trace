@@ -5,15 +5,12 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-# Where your main node is running
 NODE_IP = "127.0.0.1"
 NODE_PORT = 5001
 
-'''def send_udp_message(message):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.sendto(json.dumps(message).encode(), (NODE_IP, NODE_PORT))'''
+
 def send_udp_message(message, port=NODE_PORT):
-    
+    """Sends a message across the UDP connection to retrieve & display information"""
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.settimeout(2)  # 2 second timeout
     sock.sendto(json.dumps(message).encode(), (NODE_IP, port))
@@ -25,12 +22,13 @@ def send_udp_message(message, port=NODE_PORT):
     except socket.timeout:
         return {"status": "timeout"}
 
-
+# Home page
 @app.route('/')
 def home():
     return render_template("home.html")
 
 
+# Registration page & success/fail pages
 @app.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -57,6 +55,7 @@ def register():
 
     return render_template("register.html")
 
+# Transfer page & success/fail pages
 @app.route('/transfer', methods=["GET", "POST"])
 def transfer():
     if request.method == "POST":
@@ -82,7 +81,7 @@ def transfer():
             return render_template("transfer_fail.html", serial=serial, reason="No response from node (timeout).")
     return render_template("transfer.html")
 
-
+# Verification page & success/fail pages
 @app.route('/verify', methods=["GET", "POST"])
 def verify():
     if request.method == "POST":
@@ -103,6 +102,7 @@ def verify():
 
     return render_template("verify.html")
 
+# View blockchan page 
 @app.route('/blockchain')
 def blockchain():
     message = {

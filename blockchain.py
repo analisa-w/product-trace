@@ -2,11 +2,13 @@ from block import Block
 
 class Blockchain:
     def __init__(self):
+        """Constructor for the Blockchain class"""
         self.chain = [self.create_genesis_block()]
         self.forks = {}  # Store potential fork chains, keyed by their head block hash
         self.pending_transactions = []  # Store transactions before they're added to a block
 
     def create_genesis_block(self):
+        """Creates initial block, or block 0, to initialize the blockchain"""
         genesis = Block(0, "0" * 64, [])
         genesis.mine_block()  # Mine the genesis block
         return genesis

@@ -4,6 +4,7 @@ import time
 
 class Block:
     def __init__(self, index, prev_hash, transactions, nonce=0, hash=None, timestamp=None):
+        """Constructor for Block class"""
         self.index = index
         self.timestamp = timestamp if timestamp is not None else time.time()
         self.prev_hash = prev_hash
@@ -12,6 +13,7 @@ class Block:
         self.hash = hash if hash is not None else self.compute_hash()
 
     def compute_hash(self):
+        """Computes and returns a valid hash for the block"""
         block_content = json.dumps({
             "index": self.index,
             "timestamp": self.timestamp,

@@ -6,6 +6,7 @@ from block import Block
 
 
 def start_node(my_port):
+    """Starts running honest node over the UDP connection"""
     # Create peer list based on the current port
     base_port = (my_port // 1000) * 1000  # Get the base port (5000, 6000, etc.)
     peer_list = []
@@ -124,7 +125,7 @@ def start_node(my_port):
                     broadcast_block(sock, bc.chain[-1], peer_list)
                     response = {"status": "accepted"}
 
-                # ✅ Send a response back to sender
+                # Send a response back to sender
                 sock.sendto(json.dumps(response).encode(), addr)
 
             elif message["type"] == "verify":
@@ -333,37 +334,3 @@ if __name__ == "__main__":
     
     my_port = int(sys.argv[1])
     start_node(my_port)
-
-
-
-
-
-# import socket
-# import sys
-# import json
-
-# Take port number from command line
-'''my_port = int(sys.argv[1])
-
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.bind(("127.0.0.1", my_port))
-
-print(f"Node listening on port {my_port}...")
-
-while True:
-    data, addr = sock.recvfrom(4096)
-    message = json.loads(data.decode())
-    print(f"Received from {addr}: {message}")'''
-
-
-'''elif message["type"] == "transfer":
-                print("Received a transfer request!")
-                tx = {
-                    "type": "transfer",
-                    "serial_number": message["data"]["serial_number"],
-                    "from": message["data"]["from"],
-                    "to": message["data"]["to"]
-
-                }
-                bc.add_block([tx])
-                print(f"Transferred product: {tx}")'''

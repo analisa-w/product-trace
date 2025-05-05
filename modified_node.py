@@ -7,6 +7,7 @@ from hashlib import sha256
 import time
 
 def start_malicious_node(my_port):
+    """Starts running the malicious node over the UDP connection"""
     peer_list = [
         ("127.0.0.1", 5001),
         ("127.0.0.1", 5002),
@@ -46,13 +47,12 @@ def start_malicious_node(my_port):
                 transactions = [tx]
 
                 fake_block = Block(index, prev_hash, transactions)
-                fake_block.nonce = 0  # ❌ Invalid nonce
-                fake_block.hash = sha256("malicious".encode()).hexdigest()  # ❌ Invalid hash
+                fake_block.nonce = 0  # invalid nonce
+                fake_block.hash = sha256("malicious".encode()).hexdigest()  # invalid hash
 
                 print(f"Broadcasting malicious block with hash {fake_block.hash}")
                 broadcast_block(sock, fake_block, peer_list)
 
-                # Respond to sender as if it were successful
                 response = {"status": "malicious"}
                 sock.sendto(json.dumps(response).encode(), addr)
 
@@ -64,6 +64,7 @@ def start_malicious_node(my_port):
 
 
 def broadcast_block(sock, block, peer_list):
+    """Broadcasts the malicious block to its peers, attempts to add to chain"""
     message = {
         "type": "new_block",
         "data": block.__dict__
