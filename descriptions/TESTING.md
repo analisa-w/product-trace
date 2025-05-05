@@ -31,4 +31,4 @@ NODES
 During all of these processes, the nodes are in peer-to-peer communication, both sending each other messages and printing information to the terminal such as their own actions and the actions of their peers that they have received information about. If any issues above occur (such as interference from a malicious node, attempted reuse of a serial number, attempted transfer or verification of a nonexistent serial number), the honest nodes respond accordingly and print, send, and receive the appropriate messages. The malicious node behaves similarly, but with the specifications that it is behaving maliciously. 
 
 OTHER
-We also have some other files in our directory —- specifically main.py, test_forking.py, & send_message.py -- that we utilized during the testing process, but are not necessary for the functionality of the program. 
+We also have some other files in our directory —- specifically test_forking.py & send_message.py -- that we utilized during the testing process, but are not necessary for the functionality of the program. 
