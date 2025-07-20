@@ -4,8 +4,6 @@
 
 This project demonstrates how peer-to-peer communication, hashing, and blockchain validation can be applied to combat counterfeiting and ensure transparent ownership history.
 
-Collaborated with Lyali Shaikh and Michael Portale
-
 ---
 
 ## Features
@@ -30,7 +28,7 @@ Collaborated with Lyali Shaikh and Michael Portale
 - Custom blockchain implementation
 - JSON-based messaging protocol
 - UDP socket networking
-- Flask (optional web UI)
+- Flask 
 
 ---
 
